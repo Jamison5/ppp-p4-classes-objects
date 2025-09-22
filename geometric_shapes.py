@@ -44,38 +44,50 @@ class Rectangle:
 class Ellipse:
 
     def __init__(self, semi_major_axis, semi_minor_axis):
-        self.semi_major_axis = semi_major_axis
-        self.semi_minor_axis = semi_minor_axis
+        self.set_semi_major_axis(semi_major_axis)
+        self.set_semi_minor_axis(semi_minor_axis)
+
+    def get_semi_major_axis(self):
+        return self.__semi_major_axis
+
+    def set_semi_major_axis(self, semi_major_axis):
+        self.__semi_major_axis = semi_major_axis
+
+    def get_semi_minor_axis(self):
+        return self.__semi_minor_axis
+
+    def set_semi_minor_axis(self, semi_minor_axis):
+        self.__semi_minor_axis = semi_minor_axis
 
     def get_perimeter(self):
         perimeter = pi * (
-            3 * (self.semi_major_axis + self.semi_minor_axis)
+            3 * (self.__semi_major_axis + self.__semi_minor_axis)
             - sqrt(
-                (3 * self.semi_major_axis + self.semi_minor_axis)
-                * (self.semi_major_axis + 3 * self.semi_minor_axis)
+                (3 * self.__semi_major_axis + self.__semi_minor_axis)
+                * (self.__semi_major_axis + 3 * self.__semi_minor_axis)
             )
         )
 
         return perimeter
 
     def get_area(self):
-        area = self.semi_major_axis * self.semi_minor_axis * pi
+        area = self.__semi_major_axis * self.__semi_minor_axis * pi
         return area
 
 
 if __name__ == "__main__":
 
-    rectangle = Rectangle(5, 10)
-    print(rectangle.get_length())
+    ellipse = Ellipse(10, 5)
+    print(ellipse.get_semi_major_axis())
 
-    rectangle.set_length(10)
-    print(rectangle.get_length())
+    ellipse.set_semi_major_axis(20)
+    print(ellipse.get_semi_major_axis())
 
-    print(rectangle.get_width())
+    print(ellipse.get_semi_minor_axis())
 
-    rectangle.set_width(20)
-    print(rectangle.get_width())
+    ellipse.set_semi_minor_axis(10)
+    print(ellipse.get_semi_minor_axis())
 
-    print(rectangle._Rectangle__length)
+    print(ellipse._Ellipse__semi_major_axis)
 
-    print(rectangle.length)
+    print(ellipse.semi_major_axis)
