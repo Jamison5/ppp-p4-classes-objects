@@ -1,3 +1,7 @@
+from math import pi
+from math import sqrt
+
+
 class GeometricShape:
 
     def __init__(self, name):
@@ -25,21 +29,20 @@ class Ellipse:
         self.semi_major_axis = semi_major_axis
         self.semi_minor_axis = semi_minor_axis
 
+    def get_perimeter(self):
+        perimeter = pi * (
+            3 * (self.semi_major_axis + self.semi_minor_axis)
+            - sqrt(
+                (3 * self.semi_major_axis + self.semi_minor_axis)
+                * (self.semi_major_axis + 3 * self.semi_minor_axis)
+            )
+        )
+
+        return perimeter
+
 
 if __name__ == "__main__":
 
     ellipse = Ellipse(20, 10)
 
-    print(ellipse.semi_major_axis)
-
-    print(ellipse.semi_minor_axis)
-
-    print("------")
-
-    ellipse.semi_major_axis = 40
-
-    print(ellipse.semi_major_axis)
-
-    ellipse.semi_minor_axis = 30
-
-    print(ellipse.semi_minor_axis)
+    print(ellipse.get_perimeter())
