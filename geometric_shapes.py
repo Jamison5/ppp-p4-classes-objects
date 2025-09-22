@@ -17,15 +17,27 @@ class GeometricShape:
 class Rectangle:
 
     def __init__(self, length, width):
-        self.length = length
-        self.width = width
+        self.set_length(length)
+        self.set_width(width)
+
+    def get_length(self):
+        return self.__length
+
+    def set_length(self, length):
+        self.__length = length
+
+    def get_width(self):
+        return self.__width
+
+    def set_width(self, width):
+        self.__width = width
 
     def get_perimeter(self):
-        perimeter = (2 * self.length) + (2 * self.width)
+        perimeter = (2 * self.__length) + (2 * self.__width)
         return perimeter
 
     def get_area(self):
-        area = self.length * self.width
+        area = self.__length * self.__width
         return area
 
 
@@ -53,9 +65,17 @@ class Ellipse:
 
 if __name__ == "__main__":
 
-    geometric_shape = GeometricShape("Triangle")
-    print(geometric_shape.get_name())
-    geometric_shape.set_name("Circle")
-    print(geometric_shape.get_name())
+    rectangle = Rectangle(5, 10)
+    print(rectangle.get_length())
 
-    print(geometric_shape._GeometricShape__name)
+    rectangle.set_length(10)
+    print(rectangle.get_length())
+
+    print(rectangle.get_width())
+
+    rectangle.set_width(20)
+    print(rectangle.get_width())
+
+    print(rectangle._Rectangle__length)
+
+    print(rectangle.length)
