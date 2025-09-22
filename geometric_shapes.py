@@ -40,9 +40,20 @@ class Ellipse:
 
         return perimeter
 
+    def get_area(self):
+        area = self.semi_major_axis * self.semi_minor_axis * pi
+        return area
+
 
 if __name__ == "__main__":
 
-    ellipse = Ellipse(20, 10)
+    geometric_shape = GeometricShape("Triangle")
+    print(geometric_shape.name)
 
+    rectangle = Rectangle(10, 20)
+    print(rectangle.get_perimeter())
+    print(rectangle.get_area())
+
+    ellipse = Ellipse(20, 10)
     print(ellipse.get_perimeter())
+    print(ellipse.get_area())
