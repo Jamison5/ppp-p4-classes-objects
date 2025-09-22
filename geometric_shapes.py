@@ -14,9 +14,11 @@ class GeometricShape:
         self.__name = name
 
 
-class Rectangle:
+class Rectangle(GeometricShape):
 
-    def __init__(self, length, width):
+    def __init__(self, length, width, name="Rectangle"):
+
+        super().__init__(name)
         self.set_length(length)
         self.set_width(width)
 
@@ -41,9 +43,10 @@ class Rectangle:
         return area
 
 
-class Ellipse:
+class Ellipse(GeometricShape):
 
-    def __init__(self, semi_major_axis, semi_minor_axis):
+    def __init__(self, semi_major_axis, semi_minor_axis, name="Ellipse"):
+        super().__init__(name)
         self.set_semi_major_axis(semi_major_axis)
         self.set_semi_minor_axis(semi_minor_axis)
 
@@ -75,19 +78,41 @@ class Ellipse:
         return area
 
 
+class Square(Rectangle):
+
+    def __init__(self, side):
+
+        super().__init__(side, side, name="Square")
+
+    def get_side(self):
+        return self.get_length()
+
+    def set_side(self, side):
+        self.set_length(side)
+        self.set_width(side)
+
+
+class Circle(Ellipse):
+
+    def __init__(self, radius):
+
+        super().__init__(radius, radius, name="Circle")
+
+    def get_radius(self):
+        return self.get_semi_major_axis()
+
+    def set_radius(self, radius):
+        self.set_semi_major_axis(radius)
+        self.set_semi_minor_axis(radius)
+
+
 if __name__ == "__main__":
 
-    ellipse = Ellipse(10, 5)
-    print(ellipse.get_semi_major_axis())
-
-    ellipse.set_semi_major_axis(20)
-    print(ellipse.get_semi_major_axis())
-
-    print(ellipse.get_semi_minor_axis())
-
-    ellipse.set_semi_minor_axis(10)
-    print(ellipse.get_semi_minor_axis())
-
-    print(ellipse._Ellipse__semi_major_axis)
-
-    print(ellipse.name)
+    circle = Circle(10)
+    print(circle.get_radius())
+    circle.set_radius(20)
+    print(circle.get_radius())
+    print(circle._GeometricShape__name)
+    print(circle.get_semi_major_axis())
+    print(circle.get_perimeter())
+    print(circle.get_area())
