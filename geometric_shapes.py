@@ -14,11 +14,32 @@ class Rectangle:
         perimeter = (2 * self.length) + (2 * self.width)
         return perimeter
 
+    def get_area(self):
+        area = self.length * self.width
+        return area
+
+
+class Ellipse:
+
+    def __init__(self, semi_major_axis, semi_minor_axis):
+        self.semi_major_axis = semi_major_axis
+        self.semi_minor_axis = semi_minor_axis
+
 
 if __name__ == "__main__":
 
-    shape = Rectangle(20, 30)
+    ellipse = Ellipse(20, 10)
 
-    print(shape.length)
-    print(shape.width)
-    print(shape.get_perimeter())
+    print(ellipse.semi_major_axis)
+
+    print(ellipse.semi_minor_axis)
+
+    print("------")
+
+    ellipse.semi_major_axis = 40
+
+    print(ellipse.semi_major_axis)
+
+    ellipse.semi_minor_axis = 30
+
+    print(ellipse.semi_minor_axis)
