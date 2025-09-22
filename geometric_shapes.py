@@ -90,4 +90,4 @@ if __name__ == "__main__":
 
     print(ellipse._Ellipse__semi_major_axis)
 
-    print(ellipse.semi_major_axis)
+    print(ellipse.name)
