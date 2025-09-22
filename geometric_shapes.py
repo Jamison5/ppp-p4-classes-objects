@@ -5,7 +5,7 @@ from math import sqrt
 class GeometricShape:
 
     def __init__(self, name):
-        self.__name = name
+        self.set_name(name)
 
     def get_name(self):
         return self.__name
@@ -54,12 +54,8 @@ class Ellipse:
 if __name__ == "__main__":
 
     geometric_shape = GeometricShape("Triangle")
-    print(geometric_shape.name)
+    print(geometric_shape.get_name())
+    geometric_shape.set_name("Circle")
+    print(geometric_shape.get_name())
 
-    rectangle = Rectangle(10, 20)
-    print(rectangle.get_perimeter())
-    print(rectangle.get_area())
-
-    ellipse = Ellipse(20, 10)
-    print(ellipse.get_perimeter())
-    print(ellipse.get_area())
+    print(geometric_shape._GeometricShape__name)
