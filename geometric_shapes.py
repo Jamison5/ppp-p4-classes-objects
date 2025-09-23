@@ -120,13 +120,73 @@ class Circle(Ellipse):
         self.set_semi_minor_axis(radius)
 
 
+class ComplexShape(GeometricShape):
+
+    def __init__(self, base, holes, name="ComplexShape"):
+        super().__init__(name)
+        self.set_base(base)
+        self.set_holes(holes)
+
+    def get_base(self):
+        return self.__base
+
+    def set_base(self, base):
+        self.__base = base
+
+    def get_holes(self):
+        return self.__holes
+
+    def set_holes(self, holes):
+
+        if isinstance(holes, list):
+            self.__holes = holes
+
+        self.__holes = [holes]
+
+    def add_hole(self, hole):
+        self.__holes.append(hole)
+
+    def remove_hole(self, hole):
+        self.__holes.remove(hole)
+
+    def get_area(self):
+        area_of_holes = 0
+        for hole in self.__holes:
+            area_of_holes += hole.get_area()
+        complex_area = self.__base.get_area() - area_of_holes
+        return complex_area
+
+    def get_edge_length(self):
+        edge_length_of_holes = 0
+        for hole in self.__holes:
+            edge_length_of_holes += hole.get_perimeter()
+        edge_length_of_shape = self.__base.get_perimeter() + edge_length_of_holes
+        return edge_length_of_shape
+
+
 if __name__ == "__main__":
 
-    shape = Rectangle(5, 10)
-    shape.set_length(10)
-    print(shape.get_length())
-    print("-----------------")
-    shape.set_width(5)
-    print(shape.get_width())
-    print("-----------------")
-    shape.set_width("Hello")
+    # shape = Rectangle(5, 10)
+    # shape.set_length(10)
+    # print(shape.get_length())
+    # print("-----------------")
+    # shape.set_width(5)
+    # print(shape.get_width())
+    # print("-----------------")
+    # shape.set_width("Hello")
+
+    base = Ellipse(20, 10)
+    hole1 = Square(5)
+    hole2 = Circle(3)
+    complex_shape = ComplexShape(base, hole1)
+    print(complex_shape.get_holes())
+    print("----" * 5)
+    complex_shape.add_hole(hole2)
+    print(complex_shape.get_holes())
+    print("----" * 5)
+    complex_shape.remove_hole(hole1)
+    print(complex_shape.get_holes())
+    print("----" * 5)
+    print(complex_shape.get_area())
+    print("----" * 5)
+    print(complex_shape.get_edge_length())
