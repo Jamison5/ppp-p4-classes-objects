@@ -3,13 +3,14 @@ class InvalidArgumentError(Exception):
         super().__init__(f"The `{arg}` (type `{type(arg)}`) is invalid. {msg}")
 
 
-def validate_positive_number(arg):
-    if not isinstance(arg, (int, float)):
+def validate_positive_number(number):
+    if not isinstance(number, (int, float)):
         raise InvalidArgumentError(
-            arg, "Only the following types are allowed: <class 'int'>, <class 'float'>"
+            number,
+            "Only the following types are allowed: <class 'int'>, <class 'float'>",
         )
-    if arg <= 0:
-        raise InvalidArgumentError(arg, "The argument must be a positive number.)")
+    if number <= 0:
+        raise InvalidArgumentError(number, "The argument must be a positive number.)")
 
 
 if __name__ == "__main__":
