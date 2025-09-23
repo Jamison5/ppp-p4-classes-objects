@@ -121,11 +121,14 @@ class Circle(Ellipse):
 
 
 class ComplexShape(GeometricShape):
+    def __init__(self, base, holes):
+        super().__init__("ComplexShape")
+        self.__base = base
 
-    def __init__(self, base, holes, name="ComplexShape"):
-        super().__init__(name)
-        self.set_base(base)
-        self.set_holes(holes)
+        if isinstance(holes, list):
+            self.__holes = holes
+        else:
+            self.__holes = [holes]
 
     def get_base(self):
         return self.__base
@@ -137,31 +140,27 @@ class ComplexShape(GeometricShape):
         return self.__holes
 
     def set_holes(self, holes):
-
-        if isinstance(holes, list):
-            self.__holes = holes
-
-        self.__holes = [holes]
+        self.__holes = holes
 
     def add_hole(self, hole):
+        if isinstance(hole, list):
+            for item in hole:
+                self.__holes.append(item)
+
         self.__holes.append(hole)
 
     def remove_hole(self, hole):
         self.__holes.remove(hole)
 
     def get_area(self):
-        area_of_holes = 0
-        for hole in self.__holes:
-            area_of_holes += hole.get_area()
-        complex_area = self.__base.get_area() - area_of_holes
-        return complex_area
+        base_area = self.__base.get_area()
+        holes_area = sum(h.get_area() for h in self.__holes)
+        return base_area - holes_area
 
     def get_edge_length(self):
-        edge_length_of_holes = 0
-        for hole in self.__holes:
-            edge_length_of_holes += hole.get_perimeter()
-        edge_length_of_shape = self.__base.get_perimeter() + edge_length_of_holes
-        return edge_length_of_shape
+        base_edge = self.__base.get_perimeter()
+        holes_edge = sum(h.get_perimeter() for h in self.__holes)
+        return base_edge + holes_edge
 
 
 if __name__ == "__main__":
@@ -175,18 +174,45 @@ if __name__ == "__main__":
     # print("-----------------")
     # shape.set_width("Hello")
 
-    base = Ellipse(20, 10)
-    hole1 = Square(5)
-    hole2 = Circle(3)
-    complex_shape = ComplexShape(base, hole1)
-    print(complex_shape.get_holes())
-    print("----" * 5)
-    complex_shape.add_hole(hole2)
-    print(complex_shape.get_holes())
-    print("----" * 5)
-    complex_shape.remove_hole(hole1)
-    print(complex_shape.get_holes())
-    print("----" * 5)
-    print(complex_shape.get_area())
-    print("----" * 5)
-    print(complex_shape.get_edge_length())
+    # base = Ellipse(20, 10)
+    # hole1 = Square(5)
+    # hole2 = Circle(3)
+    # complex_shape = ComplexShape(base, hole1)
+    # print(complex_shape.get_holes())
+    # print("----" * 5)
+    # complex_shape.add_hole(hole2)
+    # print(complex_shape.get_holes())
+    # print("----" * 5)
+    # complex_shape.remove_hole(hole1)
+    # print(complex_shape.get_holes())
+    # print("----" * 5)
+    # print(complex_shape.get_area())
+    # print("----" * 5)
+    # print(complex_shape.get_edge_length())
+
+    base = Square(10)  # The base shape
+    square1 = Square(5)
+    rectangle1 = Rectangle(3, 4)
+    square2 = Square(6)  # This is the one we'll try to remove
+    rectangle2 = Rectangle(2, 7)
+
+    # Create the ComplexShape with the same structure
+    test_obj = ComplexShape(base, [square1, rectangle1, square2, rectangle2])
+
+    print("Initial holes:")
+    for i, hole in enumerate(test_obj.get_holes()):
+        print(f"  {i}: {type(hole).__name__} at {hex(id(hole))}")
+
+    print(f"\nTrying to remove square2 at {hex(id(square2))}")
+    print(f"square2 object: {square2}")
+
+    # This should remove square2 and leave [square1, rectangle1, rectangle2]
+    test_obj.remove_hole(square2)
+
+    print("\nAfter removal:")
+    for i, hole in enumerate(test_obj.get_holes()):
+        print(f"  {i}: {type(hole).__name__} at {hex(id(hole))}")
+
+    print(f"\nExpected 3 holes, got {len(test_obj.get_holes())} holes")
+    print("Expected to keep: square1, rectangle1, rectangle2")
+    print("Expected to remove: square2")
