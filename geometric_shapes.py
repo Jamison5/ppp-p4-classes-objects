@@ -19,6 +19,9 @@ class GeometricShape:
         validate_non_empty_string(name)
         self.__name = name
 
+    def __repr__(self):
+        return f"GeometricShape(name={self.__name})"
+
 
 class Rectangle(GeometricShape):
 
@@ -51,6 +54,9 @@ class Rectangle(GeometricShape):
     def get_area(self):
         area = self.__length * self.__width
         return area
+
+    def __repr__(self):
+        return f"Rectangle(a={self.get_length()}, b={self.get_width()})"
 
 
 class Ellipse(GeometricShape):
@@ -91,6 +97,9 @@ class Ellipse(GeometricShape):
         area = self.__semi_major_axis * self.__semi_minor_axis * pi
         return area
 
+    def __repr__(self):
+        return f"Ellipse(r1={self.__semi_major_axis}, r2={self.__semi_minor_axis})"
+
 
 class Square(Rectangle):
 
@@ -105,6 +114,9 @@ class Square(Rectangle):
         self.set_length(side)
         self.set_width(side)
 
+    def __repr__(self):
+        return f"Square(a={self.get_length()})"
+
 
 class Circle(Ellipse):
 
@@ -118,6 +130,9 @@ class Circle(Ellipse):
     def set_radius(self, radius):
         self.set_semi_major_axis(radius)
         self.set_semi_minor_axis(radius)
+
+    def __repr__(self):
+        return f"Circle(r={self.get_semi_major_axis()})"
 
 
 class ComplexShape(GeometricShape):
@@ -190,29 +205,41 @@ if __name__ == "__main__":
     # print("----" * 5)
     # print(complex_shape.get_edge_length())
 
-    base = Square(10)  # The base shape
-    square1 = Square(5)
-    rectangle1 = Rectangle(3, 4)
-    square2 = Square(6)  # This is the one we'll try to remove
-    rectangle2 = Rectangle(2, 7)
+    # base = Square(10)  # The base shape
+    # square1 = Square(5)
+    # rectangle1 = Rectangle(3, 4)
+    # square2 = Square(6)  # This is the one we'll try to remove
+    # rectangle2 = Rectangle(2, 7)
 
-    # Create the ComplexShape with the same structure
-    test_obj = ComplexShape(base, [square1, rectangle1, square2, rectangle2])
+    # # Create the ComplexShape with the same structure
+    # test_obj = ComplexShape(base, [square1, rectangle1, square2, rectangle2])
 
-    print("Initial holes:")
-    for i, hole in enumerate(test_obj.get_holes()):
-        print(f"  {i}: {type(hole).__name__} at {hex(id(hole))}")
+    # print("Initial holes:")
+    # for i, hole in enumerate(test_obj.get_holes()):
+    #     print(f"  {i}: {type(hole).__name__} at {hex(id(hole))}")
 
-    print(f"\nTrying to remove square2 at {hex(id(square2))}")
-    print(f"square2 object: {square2}")
+    # print(f"\nTrying to remove square2 at {hex(id(square2))}")
+    # print(f"square2 object: {square2}")
 
-    # This should remove square2 and leave [square1, rectangle1, rectangle2]
-    test_obj.remove_hole(square2)
+    # # This should remove square2 and leave [square1, rectangle1, rectangle2]
+    # test_obj.remove_hole(square2)
 
-    print("\nAfter removal:")
-    for i, hole in enumerate(test_obj.get_holes()):
-        print(f"  {i}: {type(hole).__name__} at {hex(id(hole))}")
+    # print("\nAfter removal:")
+    # for i, hole in enumerate(test_obj.get_holes()):
+    #     print(f"  {i}: {type(hole).__name__} at {hex(id(hole))}")
 
-    print(f"\nExpected 3 holes, got {len(test_obj.get_holes())} holes")
-    print("Expected to keep: square1, rectangle1, rectangle2")
-    print("Expected to remove: square2")
+    # print(f"\nExpected 3 holes, got {len(test_obj.get_holes())} holes")
+    # print("Expected to keep: square1, rectangle1, rectangle2")
+    # print("Expected to remove: square2")
+
+    geometric_shape = GeometricShape("Triangle")
+    print(geometric_shape)
+
+    square = Square(5)
+    print(square)
+
+    ellipse = Ellipse(5, 3)
+    print(ellipse)
+
+    circle = Circle(5)
+    print(circle)
