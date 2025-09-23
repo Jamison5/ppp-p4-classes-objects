@@ -177,7 +177,8 @@ class ComplexShape(GeometricShape):
             for item in hole:
                 self.__holes.append(item)
 
-        self.__holes.append(hole)
+        else:
+            self.__holes.append(hole)
 
     def remove_hole(self, hole):
         self.__holes.remove(hole)
