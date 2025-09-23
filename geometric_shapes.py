@@ -192,6 +192,9 @@ class ComplexShape(GeometricShape):
         holes_edge = sum(h.get_perimeter() for h in self.__holes)
         return base_edge + holes_edge
 
+    def __repr__(self):
+        return f"ComplexShape({self.__base.get_name()} with {len(self.__holes)} holes)"
+
 
 if __name__ == "__main__":
 
@@ -262,3 +265,8 @@ if __name__ == "__main__":
 
     circle = Circle(5)
     print(circle)
+
+    base = Square(100)
+    holes = [Circle(10), Circle(5)]
+    complex_shape = ComplexShape(base, holes)
+    print(complex_shape)
