@@ -13,6 +13,13 @@ def validate_positive_number(number):
         raise InvalidArgumentError(number, "The argument must be a positive number.)")
 
 
+def validate_non_empty_string(string):
+    if not isinstance(string, str):
+        raise InvalidArgumentError(string, "The argument must be a string.")
+    if len(string) == 0:
+        raise InvalidArgumentError(string, "The argument must be a non-empty string.")
+
+
 if __name__ == "__main__":
 
-    print(validate_positive_number(False))
+    print(validate_non_empty_string(5))
