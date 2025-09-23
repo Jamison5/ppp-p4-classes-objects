@@ -1,7 +1,6 @@
 from math import pi
 from math import sqrt
 from utils import (
-    InvalidArgumentError,
     validate_positive_number,
     validate_non_empty_string,
 )
@@ -10,12 +9,14 @@ from utils import (
 class GeometricShape:
 
     def __init__(self, name):
+        validate_non_empty_string(name)
         self.set_name(name)
 
     def get_name(self):
         return self.__name
 
     def set_name(self, name):
+        validate_non_empty_string(name)
         self.__name = name
 
 
@@ -24,19 +25,23 @@ class Rectangle(GeometricShape):
     def __init__(self, length, width, name="Rectangle"):
 
         super().__init__(name)
+        validate_positive_number(length)
         self.set_length(length)
+        validate_positive_number(width)
         self.set_width(width)
 
     def get_length(self):
         return self.__length
 
     def set_length(self, length):
+        validate_positive_number(length)
         self.__length = length
 
     def get_width(self):
         return self.__width
 
     def set_width(self, width):
+        validate_positive_number(width)
         self.__width = width
 
     def get_perimeter(self):
@@ -52,19 +57,23 @@ class Ellipse(GeometricShape):
 
     def __init__(self, semi_major_axis, semi_minor_axis, name="Ellipse"):
         super().__init__(name)
+        validate_positive_number(semi_major_axis)
         self.set_semi_major_axis(semi_major_axis)
+        validate_positive_number(semi_minor_axis)
         self.set_semi_minor_axis(semi_minor_axis)
 
     def get_semi_major_axis(self):
         return self.__semi_major_axis
 
     def set_semi_major_axis(self, semi_major_axis):
+        validate_positive_number(semi_major_axis)
         self.__semi_major_axis = semi_major_axis
 
     def get_semi_minor_axis(self):
         return self.__semi_minor_axis
 
     def set_semi_minor_axis(self, semi_minor_axis):
+        validate_positive_number(semi_minor_axis)
         self.__semi_minor_axis = semi_minor_axis
 
     def get_perimeter(self):
@@ -113,11 +122,11 @@ class Circle(Ellipse):
 
 if __name__ == "__main__":
 
-    circle = Circle(10)
-    print(circle.get_radius())
-    circle.set_radius(20)
-    print(circle.get_radius())
-    print(circle._GeometricShape__name)
-    print(circle.get_semi_major_axis())
-    print(circle.get_perimeter())
-    print(circle.get_area())
+    shape = Rectangle(5, 10)
+    shape.set_length(10)
+    print(shape.get_length())
+    print("-----------------")
+    shape.set_width(5)
+    print(shape.get_width())
+    print("-----------------")
+    shape.set_width("Hello")
