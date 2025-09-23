@@ -4,8 +4,6 @@ class InvalidArgumentError(Exception):
 
 
 def validate_positive_number(arg):
-    # if isinstance(arg, bool):
-    #     raise InvalidArgumentError(arg, "The argument must be a positive number.")
     if not isinstance(arg, (int, float)):
         raise InvalidArgumentError(
             arg, "Only the following types are allowed: <class 'int'>, <class 'float'>"
