@@ -22,6 +22,9 @@ class GeometricShape:
     def __repr__(self):
         return f"GeometricShape(name={self.__name})"
 
+    def __eq__(self, other):
+        return repr(self) == repr(other)
+
 
 class Rectangle(GeometricShape):
 
@@ -57,6 +60,9 @@ class Rectangle(GeometricShape):
 
     def __repr__(self):
         return f"Rectangle(a={self.get_length()}, b={self.get_width()})"
+
+    def __eq__(self, other):
+        return repr(self) == repr(other)
 
 
 class Ellipse(GeometricShape):
@@ -100,6 +106,9 @@ class Ellipse(GeometricShape):
     def __repr__(self):
         return f"Ellipse(r1={self.__semi_major_axis}, r2={self.__semi_minor_axis})"
 
+    def __eq__(self, other):
+        return repr(self) == repr(other)
+
 
 class Square(Rectangle):
 
@@ -117,6 +126,9 @@ class Square(Rectangle):
     def __repr__(self):
         return f"Square(a={self.get_length()})"
 
+    def __eq__(self, other):
+        return repr(self) == repr(other)
+
 
 class Circle(Ellipse):
 
@@ -133,6 +145,9 @@ class Circle(Ellipse):
 
     def __repr__(self):
         return f"Circle(r={self.get_semi_major_axis()})"
+
+    def __eq__(self, other):
+        return repr(self) == repr(other)
 
 
 class ComplexShape(GeometricShape):
@@ -233,7 +248,11 @@ if __name__ == "__main__":
     # print("Expected to remove: square2")
 
     geometric_shape = GeometricShape("Triangle")
+    geometric_shape2 = GeometricShape("Triangle")
+    geometric_shape3 = GeometricShape("Square")
     print(geometric_shape)
+    print(geometric_shape == geometric_shape2)
+    print(geometric_shape == geometric_shape3)
 
     square = Square(5)
     print(square)
